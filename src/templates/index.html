@@ -13,22 +13,37 @@
             margin-top: 50px;
         }
         .btn-custom {
-            background-color: forestgreen;
+            background-color: green;
             color: white;
         }
         .btn-custom:hover {
             background-color: darkgreen;
         }
+        .form-check-label {
+            margin-left: 5px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="text-center">Upload a File</h1>
+        <h1 class="text-center">K7HSG ADIF Cleaner</h1>
         <form action="/index" method="post" enctype="multipart/form-data" class="mt-4">
+            <div class="form-group">
+                <label for="start_datetime">Start Time:</label>
+                <input type="text" name="start_datetime" class="form-control" placeholder="YYYYMMDDTHHMMSS">
+            </div>
+            <div class="form-group">
+                <label for="end_datetime">End Time:</label>
+                <input type="text" name="end_datetime" class="form-control" placeholder="YYYYMMDDTHHMMSS">
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" name="dedup" class="form-check-input" id="dedup">
+                <label class="form-check-label" for="dedup">Dedup Callsigns:</label>
+            </div>
             <div class="form-group">
                 <input type="file" name="file" class="form-control-file">
             </div>
-            <button type="submit" class="btn btn-custom">Upload</button>
+            <button type="submit" class="btn btn-custom">Clean</button>
         </form>
         {% if file_content %}
             <div class="mt-4">
