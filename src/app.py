@@ -30,14 +30,14 @@ def index():
         dedup = 'dedup' in request.form
 
         try:
-            start_datetime = datetime.strptime(start_datetime_str, '%Y%m%dT%H%M%S')
+            start_datetime = datetime.strptime(start_datetime_str, '%Y-%m-%dT%H:%M')
         except ValueError:
             return 'Invalid start datetime format'
         
         end_datetime = None
         if end_datetime_str:
             try:
-                end_datetime = datetime.strptime(end_datetime_str, '%Y%m%dT%H%M%S')
+                end_datetime = datetime.strptime(end_datetime_str, '%Y-%m-%dT%H:%M')
             except ValueError:
                 return 'Invalid end datetime format'
 
