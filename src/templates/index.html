@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .btn-custom {
+            background-color: green;
+            color: white;
+        }
+        .btn-custom:hover {
+            background-color: darkgreen;
+        }
+        .form-check-label {
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">K7HSG ADIF Cleaner</h1>
+        <form action="/index" method="post" enctype="multipart/form-data" class="mt-4">
+            <div class="form-group">
+                <label for="start_datetime">Start Time UTC:</label>
+                <input type="datetime-local" name="start_datetime" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="end_datetime">End Time UTC:</label>
+                <input type="datetime-local" name="end_datetime" class="form-control">
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" name="dedup" class="form-check-input" id="dedup">
+                <label class="form-check-label" for="dedup">Dedup Callsigns:</label>
+            </div>
+            <div class="form-group">
+                <input type="file" name="file" class="form-control-file">
+            </div>
+            <button type="submit" class="btn btn-custom">Clean</button>
+        </form>
+        {% if file_content %}
+            <div class="mt-4">
+                <h2>File Content:</h2>
+                <pre class="p-3 border">{{ file_content }}</pre>
+                <a href="{{ url_for('download_file', filename='cleaned_log.adi') }}" class="btn btn-custom mt-2">Download</a>
+            </div>
+        {% endif %}
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
