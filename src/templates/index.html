@@ -49,6 +49,7 @@
             <div class="mt-4">
                 <h2>File Content:</h2>
                 <pre class="p-3 border">{{ file_content }}</pre>
+                <a href="{{ url_for('download_file', filename='cleaned_log.adi') }}" class="btn btn-custom mt-2">Download</a>
             </div>
         {% endif %}
     </div>

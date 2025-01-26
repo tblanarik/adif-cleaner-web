@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_file
 import cleaner
 from datetime import datetime
+import io
 
 app = Flask(__name__)
 
@@ -25,8 +26,13 @@ def read_and_filter_file_content(file, start_datetime, end_datetime, dedup):
     file_content = cleaner.filter_adi_data(file_content, start_datetime, end_datetime, dedup)
     return '\n'.join(file_content)
 
+@app.route('/download/<filename>')
+def download_file(filename):
+    return send_file(io.BytesIO(file_content.encode('utf-8')), as_attachment=True, download_name=filename)
+
 @app.route('/index', methods=['GET', 'POST'])
 def index():
+    global file_content
     file_content = None
     if request.method == 'POST':
         if 'file' not in request.files:
