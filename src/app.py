@@ -5,10 +5,6 @@ import io
 
 app = Flask(__name__)
 
-@app.route('/')
-def hello():
-    return 'Hello, World!'
-
 def parse_datetime(datetime_str):
     try:
         return datetime.strptime(datetime_str, '%Y-%m-%dT%H:%M')
@@ -30,7 +26,7 @@ def read_and_filter_file_content(file, start_datetime, end_datetime, dedup):
 def download_file(filename):
     return send_file(io.BytesIO(file_content.encode('utf-8')), as_attachment=True, download_name=filename)
 
-@app.route('/index', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
     global file_content
     file_content = None
